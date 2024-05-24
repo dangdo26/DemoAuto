@@ -14,6 +14,8 @@ public class ElementsUploadFileQATest extends BaseTest {
     @Test
     public void uploadTest()  {
         eUpload.upload();
+        eUpload.verifyNameMessageDisplay(eUpload.filePath,"not match filePath");
+
     }
 
 

@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 
 import java.awt.*;
+import java.io.File;
 
 import static Keywords.WebUi.*;
 
@@ -16,7 +17,8 @@ public class ElementsUploadFileQAPage {
     public By pUploadFilePath = By.id("uploadedFilePath");
 
 
- public String filePath = "C:\\Users\\LENOVO\\OneDrive\\Máy tính\\Hợp đồng.docx";
+    public String filePath = "C:\\Users\\LENOVO\\OneDrive\\Máy tính\\Hợp đồng.docx";
+
     public void enterFileInput() {
         setText(uploadBtn, filePath);
     }
@@ -27,11 +29,14 @@ public class ElementsUploadFileQAPage {
     }
 
 
-    public void upload() {
+    public void upload() throws Exception {
         openURL(URL);
+        File file = new File(filePath);
+        if (!file.exists()) {
+            throw new Exception("File does not exist: " + filePath);
+        }
         enterFileInput();
-        sleep(1);
-
+        waitForElementVisible(pUploadFilePath);
     }
 
 

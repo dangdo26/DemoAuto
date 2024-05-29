@@ -12,7 +12,7 @@ public class ElementsUploadFileQATest extends BaseTest {
 
 
     @Test
-    public void uploadTest()  {
+    public void uploadTest() throws Exception {
         eUpload.upload();
         eUpload.verifyNameMessageDisplay(eUpload.filePath,"not match filePath");
 

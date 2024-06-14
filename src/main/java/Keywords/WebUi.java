@@ -6,6 +6,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import io.qameta.allure.Step;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.LogUtils;
 
@@ -130,11 +131,11 @@ public class WebUi {
 
 
     // Đợi đến khi 1 element có thể dùng được
-    public static void waitForElementVisible(By by) {
-        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(EXPLICIT_WAIT_TIMEOUT), Duration.ofMillis(500));
+        public static void waitForElementVisible(By by) {
+            WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(EXPLICIT_WAIT_TIMEOUT), Duration.ofMillis(500));
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(by));
-    }
+            wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+        }
 
 
     // Kiểm tra xem element có tồn tại
@@ -195,6 +196,32 @@ public class WebUi {
         LogUtils.info("Double Click on element" + by );
 
     }
+
+    public static void selectTextInDropdown(By by, String selectText) {
+        waitForElementVisible(by);
+        System.out.print("1");
+        Select dropdown = new Select(getWebElement(by));
+        System.out.print("2");
+        dropdown.selectByVisibleText(selectText);
+        LogUtils.info("Select Dropdown " + by );
+        LogUtils.info("Select " + selectText + " in dropdown " + by );
+        sleep(3);
+
+    }
+
+//    public static void selectTextInDropdownBySpan(By by, String selectText) {
+//        getWebElement(by).click();
+//
+//
+//
+//        dropdown.selectByVisibleText(selectText);
+//        LogUtils.info("Select Dropdown " + by );
+//        LogUtils.info("Select " + selectText + " in dropdown " + by );
+//
+//    }
+
+
+
 
 
 }

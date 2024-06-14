@@ -7,12 +7,12 @@ import page.BranchesPage;
 
 public class BranchesTest extends BaseTest {
 
-    BranchesPage brachePage = new BranchesPage();
+    BranchesPage branchesPage = new BranchesPage();
 
 
     @Test
     public void addBranchSuccess() {
-        brachePage.addNewBranch();
+        branchesPage.addNewBranch();
 
     }
 

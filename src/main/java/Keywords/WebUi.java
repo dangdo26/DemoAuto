@@ -229,6 +229,27 @@ public class WebUi {
     }
 
 
+    public static void selectAddressByInputGGmap(By by, String keySearch, By elenmentDropdown) {
+        try {
+            setText(by, keySearch);
+            WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(EXPLICIT_WAIT_TIMEOUT), Duration.ofMillis(500));
+            List<WebElement> suggestions = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(elenmentDropdown));
+            if (!suggestions.isEmpty()) {
+                suggestions.get(0).click();
+            } else {
+                System.out.println("Don't find suggestion");
+            }
+        } finally {
+
+        }
+    }
+
+
+    public static void waitForElementRefresh(By by) {
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(EXPLICIT_WAIT_TIMEOUT), Duration.ofMillis(500));
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(by));
+    }
 
 
 }

@@ -131,11 +131,11 @@ public class WebUi {
 
 
     // Đợi đến khi 1 element có thể dùng được
-        public static void waitForElementVisible(By by) {
-            WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(EXPLICIT_WAIT_TIMEOUT), Duration.ofMillis(500));
+    public static void waitForElementVisible(By by) {
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(EXPLICIT_WAIT_TIMEOUT), Duration.ofMillis(500));
 
-            wait.until(ExpectedConditions.visibilityOfElementLocated(by));
-        }
+        wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+    }
 
 
     // Kiểm tra xem element có tồn tại
@@ -193,33 +193,40 @@ public class WebUi {
         waitForElementVisible(by);
         Actions action = new Actions(getDriver());
         action.doubleClick(getWebElement(by)).perform();
-        LogUtils.info("Double Click on element" + by );
+        LogUtils.info("Double Click on element" + by);
 
     }
 
+
+    // select Text in dropdown by Select
     public static void selectTextInDropdown(By by, String selectText) {
         waitForElementVisible(by);
-        System.out.print("1");
         Select dropdown = new Select(getWebElement(by));
-        System.out.print("2");
         dropdown.selectByVisibleText(selectText);
-        LogUtils.info("Select Dropdown " + by );
-        LogUtils.info("Select " + selectText + " in dropdown " + by );
-        sleep(3);
+        LogUtils.info("Select Dropdown " + by);
+        LogUtils.info("Select " + selectText + " in dropdown " + by);
 
     }
 
-//    public static void selectTextInDropdownBySpan(By by, String selectText) {
-//        getWebElement(by).click();
-//
-//
-//
-//        dropdown.selectByVisibleText(selectText);
-//        LogUtils.info("Select Dropdown " + by );
-//        LogUtils.info("Select " + selectText + " in dropdown " + by );
-//
-//    }
+    // select index in dropdown by Select
+    public static void selecIndexInDropdown(By by, int index) {
+        waitForElementVisible(by);
+        Select dropdown = new Select(getWebElement(by));
+        dropdown.selectByIndex(index);
+        LogUtils.info("Select Dropdown " + by);
+        LogUtils.info("Select " + index + " in dropdown " + by);
 
+    }
+
+    // select value in dropdown by Select
+    public static void selecValueInDropdown(By by, String value) {
+        waitForElementVisible(by);
+        Select dropdown = new Select(getWebElement(by));
+        dropdown.selectByValue(value);
+        LogUtils.info("Select Dropdown " + by);
+        LogUtils.info("Select " + value + " in dropdown " + by);
+
+    }
 
 
 

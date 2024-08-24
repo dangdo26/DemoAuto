@@ -19,9 +19,13 @@ public class BranchesPage {
     public By branchNameInput = By.className("name-branch-create-branch-restaurant");
     public By branchPhoneInput = By.className("phone-branch-create-branch-restaurant");
     public By branchAvgAmountInput = By.className("avg-amount-branch-create-branch-restaurant");
-    public By selectCity = By.id("select-city-create-branch");
-    public By selectDistrict = By.className("select-district-create-branch-setting-first");
-    public By selectWard = By.className("select-ward-create-branch-setting-first");
+    public By selectCity = By.id("select2-select-city-create-branch-container");
+    public By selectCityInDropdown = By.className("select2-results__option");
+
+
+    public By selectDistrict = By.className("select2-selection__rendered");
+    public By selectDistrict1 = By.id("select-district-create-branch-setting-first");
+    public By selectWard = By.id("select2-yvpj-container");
     public By addressInput = By.className("address-branch-create-branch-setting-restaurant");
     public By addressSelect = By.id("box-search-address-create-branch-setting-restaurant");
     public By brand = By.id("select2-selection--single");
@@ -43,11 +47,15 @@ LoginTest login = new LoginTest();
         setText(branchNameInput, datafake.name );
         setText(branchPhoneInput, datafake.phoneNumber);
         setText(branchAvgAmountInput, "100000");
-        selecIndexInDropdown(selectCity, 1);
-        waitForElementRefresh(selectDistrict);
-        selecIndexInDropdown(selectDistrict, 1);
-        waitForElementRefresh(selectWard);
-        selecIndexInDropdown(selectWard, 1);
+        clickInDropdown(selectCity, selectCityInDropdown ,2);
+
+//        waitForPerFormText(selectDistrict, "Vui lòng chọn");
+sleep(1);
+        clickInDropdown(selectDistrict1,selectCityInDropdown ,1);
+//        waitForElementRefresh(selectWard);
+//        waitForPerFormText(selectDistrict, "Vui lòng chọn");
+        sleep(1);
+        clickInDropdown(selectWard,selectCityInDropdown ,1);
         selectAddressByInputGGmap(addressInput, "303", addressSelect);
 
         sleep(5);

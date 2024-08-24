@@ -34,7 +34,7 @@ public class BaseTest {
         AllureManager.delReport();
     }
 
-    @BeforeMethod
+    @BeforeClass
     @Parameters({"browser"})
     public void createDriver() {
         WebDriver driver = setupDriver(BROWSER);
@@ -68,7 +68,6 @@ public class BaseTest {
         ChromeOptions options = new ChromeOptions();
 //        options.addArguments("--user-data-dir=" + userDataDirectory);
         if (ConstantGlobal.HEADLESS == true) {
-
             options.addArguments("--headless=new");
             options.addArguments("window-size=1800,900");
         }

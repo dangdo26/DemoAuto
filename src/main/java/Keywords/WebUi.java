@@ -1,5 +1,6 @@
 package Keywords;
 
+import junit.framework.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.*;
@@ -12,10 +13,10 @@ import utils.LogUtils;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.Set;
 
 import static driver.DriverManager.getDriver;
 import static junit.framework.Assert.assertTrue;
-import static junit.framework.Assert.fail;
 
 public class WebUi {
     private static int EXPLICIT_WAIT_TIMEOUT = 10;
@@ -25,6 +26,10 @@ public class WebUi {
     // Tìm element
     public static WebElement getWebElement(By by) {
         return getDriver().findElement(by);
+    }
+
+    public static WebElement getWebElements(By by) {
+        return (WebElement) getDriver().findElements(by);
     }
 
 
@@ -61,6 +66,22 @@ public class WebUi {
     public static void openURL(String URL) {
         getDriver().get(URL);
         LogUtils.info("Open URL: " + URL);
+    }
+
+    @Step("Open URL: {0}")
+    public static void navi(String URL) {
+
+
+        Set<Cookie> cookies = getDriver().manage().getCookies();
+
+        // Điều hướng đến trang khác mà không cần đăng nhập lại
+        getDriver().get(URL);
+
+        // Thêm cookies đã lưu vào phiên làm việc hiện tại
+        for (Cookie cookie : cookies) {
+            getDriver().manage().addCookie(cookie);
+        }
+
     }
 
 
@@ -135,6 +156,14 @@ public class WebUi {
         WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(EXPLICIT_WAIT_TIMEOUT), Duration.ofMillis(500));
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+    }
+
+    // Đợi đến khi 1 đoạn text được hiển thị trong 1 element
+    public static void waitForPerFormText(By by, String expectedText) {
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(EXPLICIT_WAIT_TIMEOUT), Duration.ofMillis(500));
+
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(by, expectedText));
+
     }
 
 
@@ -218,6 +247,24 @@ public class WebUi {
 
     }
 
+    public static void clickInDropdown(By by, By by2, int index) {
+        waitForElementVisible(by);
+        WebElement dropdownButton = getDriver().findElement(by); // Thay bằng ID thật của nút mở dropdown
+        dropdownButton.click();
+
+        // Lấy tất cả các phần tử trong danh sách dropdown
+        List<WebElement> dropdownItems = getDriver().findElements(by2); // Thay đổi XPath cho phù hợp với cấu trúc trang
+
+        // Kiểm tra nếu index hợp lệ
+        if (index >= 0 && index < dropdownItems.size()) {
+            // Click vào phần tử tại index
+            dropdownItems.get(index).click();
+        }
+        LogUtils.info("Select Dropdown " + by);
+        LogUtils.info("Select " + index + " in dropdown " + by);
+
+    }
+
     // select value in dropdown by Select
     public static void selecValueInDropdown(By by, String value) {
         waitForElementVisible(by);
@@ -249,6 +296,14 @@ public class WebUi {
         WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(EXPLICIT_WAIT_TIMEOUT), Duration.ofMillis(500));
 
         wait.until(ExpectedConditions.presenceOfElementLocated(by));
+    }
+
+    public static void verifyNotiAfterAction(By by, String expected){
+
+        waitForElementVisible(by);
+        WebElement a = getWebElement(by);
+        String notiText = a.getText();
+        Assert.assertEquals( " don't match",expected ,notiText);
     }
 
 

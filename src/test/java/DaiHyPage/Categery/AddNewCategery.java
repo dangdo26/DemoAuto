@@ -2,7 +2,9 @@ package DaiHyPage.Categery;
 
 import Keywords.TemplateElement;
 import TestcaseDaiHy.LoginTest;
+import constant.ConstantGlobal;
 import helpers.DataFake;
+import helpers.PropertiesHelper;
 import org.openqa.selenium.By;
 import helpers.DataScript;
 
@@ -12,7 +14,7 @@ import static Keywords.WebUi.*;
 public class AddNewCategery {
     DataFake dataFake = new DataFake();
 
-    String URL = "https://beta.daihy.ohqsoft.com/category-food-data";
+    String URL = "https://" + ConstantGlobal.ENVIRONMENT +".daihy.ohqsoft.com/category-food-data";
     By addNewButton = By.xpath("//*[@id='table-enable-category-food-data_wrapper']/div[1]/div[2]/div/label");
 
     By categeryName = By.id("name-create-category-food-data");

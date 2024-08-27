@@ -33,6 +33,19 @@ public class WebUi {
     }
 
 
+
+    public static By chooseIndexElements(By by, int index){
+        waitForElementVisible(by);
+        List<WebElement> elements = getDriver().findElements(by);
+        WebElement secondElement = elements.get(index);
+        System.out.print(elements);
+
+        return by;
+    }
+
+
+
+
     // Hover vào element
     public static void hoverOnElement(By by) {
         waitForElementVisible(by);

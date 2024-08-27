@@ -108,13 +108,7 @@ public class BaseTest {
     }
 
     @AfterMethod
-    public void closeDriver(ITestResult result) {
-//        String testName = result.getMethod().getMethodName(); // Lấy tên của testcase
-//        String className = result.getMethod().getRealClass().getSimpleName(); // Lấy tên của class chứa testcase
-//        if (ITestResult.FAILURE == result.getStatus()) {
-//            // Capture screenshot
-//            cap.captureScreenshot(testName, className);
-//        }
+    public void closeDriver() {
         if (DriverManager.getDriver() != null) {
             DriverManager.quit();
         }

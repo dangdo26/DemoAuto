@@ -1,5 +1,6 @@
 package DaiHyPage;
 
+import constant.ConstantGlobal;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 
@@ -7,7 +8,7 @@ import static Keywords.WebUi.*;
 
 public class DaiHyLogin {
 
-    String URL = "https://beta.daihy.ohqsoft.com/login";
+    String URL = "https://" + ConstantGlobal.ENVIRONMENT +  ".daihy.ohqsoft.com/login";
     String expectedUrl = "https://beta.daihy.ohqsoft.com/branch-dashboard";
 
 

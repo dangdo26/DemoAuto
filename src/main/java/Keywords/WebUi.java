@@ -131,9 +131,13 @@ public class WebUi {
     @Step("Set text {1} on element {0}")
     public static void setText(By by, String value) {
         waitForElementVisible(by);
+        getWebElement(by).clear();
         getWebElement(by).sendKeys(value);
         LogUtils.info("Set text " + value + " on element " + by);
     }
+
+
+
 
     // Lấy text từ 1 element
     @Step("Get text of element {0}")
@@ -318,6 +322,9 @@ public class WebUi {
         String notiText = a.getText();
         Assert.assertEquals( " don't match",expected ,notiText);
     }
+
+
+
 
 
 }
